@@ -23,6 +23,7 @@ export default function Home (){
     const [ano, setAno] = useState('');
     const [dia, setDia] = useState('');
     const [errors, setErrors] = useState([]);
+    console.log('teste');
 
 
     const fields = {

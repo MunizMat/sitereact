@@ -1,6 +1,9 @@
 import React, {useState, useEffect, useRef, useLayoutEffect} from "react";
 import {provas} from '../../prova';
-import { Secao } from "../../components/cartaoresposta/Secao";
+import { Secao } from "../../components/cartaoresposta/subcomponents/Secao";
+import { useDispatch, useSelector } from "react-redux";
+import { setInProgress } from "../../store/slices/progressSlice";
+import { setRespostas } from "../../store/slices/respostasSlice";
 import Countdown from "react-countdown";
 import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
@@ -21,11 +24,11 @@ export default function Prova(){
     const endDate = useRef();
 
     // States 
-    const [inProgress, setInProgress] = useState(false);
-    const [respostas, setRespostas] = useState({});
+    const inProgress = useSelector(state => state.progress.value);
+    const respostas = useSelector(state => state.respostas.value);
     const [show, setShow] = useState(false);
-    
- 
+
+    const dispatch = useDispatch();
 
     // Effects 
     useEffect(()=>{
@@ -46,7 +49,6 @@ export default function Prova(){
             const respostas = JSON.parse(localStorage.getItem('respostas'));
             const inProgress = JSON.parse(localStorage.getItem('inProgress'));
             endDate.current = JSON.parse(localStorage.getItem('endDate'));
-            setInProgress(inProgress);
             setRespostas(respostas);
         }
     }, [])
@@ -60,16 +62,12 @@ export default function Prova(){
 
     const handleBtnClick = function() {
         createDate();
-        setInProgress(true);
         localStorage.setItem('respostas', JSON.stringify(respostas));
     }
 
     const handleRadioClick = (e) => {
         const [ questao, letra ] = e.target.id.split('-');
-        setRespostas({
-            ...respostas,
-            [questao]: letra,
-        })
+        dispatch(setRespostas({questao, letra}))
     }
 
     const getDuration = () => new Date(prova.tempoDeProva * 3600 * 1000).toLocaleTimeString('pt-BR', { timeZone: 'UTC'})
@@ -83,7 +81,6 @@ export default function Prova(){
     }
 
 
-
     return (
         <Container>
             <Form id="formprova" action="#">
@@ -94,7 +91,7 @@ export default function Prova(){
                     <>
                         <span className="text-center fs-1">{`${getDuration()}`}</span>
                         <div className="text-center"> 
-                            <Button as="input" onClick={handleBtnClick} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Iniciar Avaliação" />
+                            <Button as="input" onClick={() => dispatch(setInProgress())} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Iniciar Avaliação" />
                         </div>
                     </>}
 

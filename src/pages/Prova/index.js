@@ -2,8 +2,6 @@ import React, {useState, useEffect, useRef, useLayoutEffect} from "react";
 import {provas} from '../../prova';
 import { Secao } from "../../components/cartaoresposta/subcomponents/Secao";
 import { useDispatch, useSelector } from "react-redux";
-import { setInProgress } from "../../store/slices/progressSlice";
-import { setRespostas } from "../../store/slices/respostasSlice";
 import Countdown from "react-countdown";
 import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
@@ -11,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import * as actions from "../../store/modules/prova/actions";
 
 const nomeProva = 'FUVEST-2019';
 const [tipoDeProva, ano, dia] = nomeProva.split('-');
@@ -24,16 +23,16 @@ export default function Prova(){
     const endDate = useRef();
 
     // States 
-    const inProgress = useSelector(state => state.progress.value);
-    const respostas = useSelector(state => state.respostas.value);
+    const provaIniciada = useSelector(state => state.prova.provaIniciada);
+    const respostas = useSelector(state => state.prova.respostas);
     const [show, setShow] = useState(false);
 
     const dispatch = useDispatch();
 
     // Effects 
     useEffect(()=>{
-        localStorage.setItem('inProgress', JSON.stringify(inProgress));
-    }, [inProgress])
+        localStorage.setItem('provaIniciada', JSON.stringify(provaIniciada));
+    }, [provaIniciada])
 
     useEffect(()=>{
         localStorage.setItem('respostas', JSON.stringify(respostas));
@@ -44,12 +43,11 @@ export default function Prova(){
 
     useLayoutEffect(()=>{
         firstrRender.current = false;
-        const inProgress = JSON.parse(localStorage.getItem('inProgress'));
-        if(inProgress) {
+        const provaIniciada = JSON.parse(localStorage.getItem('provaIniciada'));
+        if(provaIniciada) {
             const respostas = JSON.parse(localStorage.getItem('respostas'));
-            const inProgress = JSON.parse(localStorage.getItem('inProgress'));
+            const provaIniciada = JSON.parse(localStorage.getItem('provaIniciada'));
             endDate.current = JSON.parse(localStorage.getItem('endDate'));
-            setRespostas(respostas);
         }
     }, [])
     
@@ -67,7 +65,7 @@ export default function Prova(){
 
     const handleRadioClick = (e) => {
         const [ questao, letra ] = e.target.id.split('-');
-        dispatch(setRespostas({questao, letra}))
+        dispatch(actions.selecionarResposta())
     }
 
     const getDuration = () => new Date(prova.tempoDeProva * 3600 * 1000).toLocaleTimeString('pt-BR', { timeZone: 'UTC'})
@@ -87,15 +85,15 @@ export default function Prova(){
                 <Row>
                     <h1 className="text-center my-4 fs-1">Prova {`${tipoDeProva} ${ano}`}{tipoDeProva === 'ENEM' && ` Dia ${dia}`}</h1>
         
-                    {!inProgress && 
+                    {!provaIniciada && 
                     <>
                         <span className="text-center fs-1">{`${getDuration()}`}</span>
                         <div className="text-center"> 
-                            <Button as="input" onClick={() => dispatch(setInProgress())} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Iniciar Avaliação" />
+                            <Button as="input" onClick={() => dispatch(actions.iniciarProva())} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Iniciar Avaliação" />
                         </div>
                     </>}
 
-                    {inProgress && <Countdown className="text-center fs-1" autoStart={true} daysInHours={true} date={new Date(endDate.current)} />}
+                    {provaIniciada && <Countdown className="text-center fs-1" autoStart={true} daysInHours={true} date={new Date(endDate.current)} />}
 
                 </Row>
                 <Row>
@@ -105,7 +103,7 @@ export default function Prova(){
                             sliceBegin={0}
                             sliceEnd={prova.numQuestoes / 3}
                             numerosQuestoes={numerosQuestoes}
-                            inProgress={inProgress}
+                            provaIniciada={provaIniciada}
                             clickHandler={handleRadioClick}
                             respostas={respostas}
                             prova={prova}
@@ -117,13 +115,13 @@ export default function Prova(){
                             sliceBegin={prova.numQuestoes / 3}
                             sliceEnd={prova.numQuestoes / 3 * 2}
                             numerosQuestoes={numerosQuestoes}
-                            inProgress={inProgress}
+                            provaIniciada={provaIniciada}
                             clickHandler={handleRadioClick}
                             respostas={respostas}
                             prova={prova}
                             
                         />
-                         {inProgress && <Button as="input" onClick={handleModalShow} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Finalizar Avaliação" />}
+                         {provaIniciada && <Button as="input" onClick={handleModalShow} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Finalizar Avaliação" />}
                     </Col>
 
                     <Col>
@@ -131,7 +129,7 @@ export default function Prova(){
                             sliceBegin={prova.numQuestoes / 3 * 2}
                             sliceEnd={prova.numQuestoes}
                             numerosQuestoes={numerosQuestoes}
-                            inProgress={inProgress}
+                            provaIniciada={provaIniciada}
                             clickHandler={handleRadioClick}
                             respostas={respostas}
                             prova={prova}

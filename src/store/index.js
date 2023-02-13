@@ -1,8 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import progressReducer from "./slices/progressSlice";
-import respostasReducer from "./slices/respostasSlice";
+import { createStore } from "redux";
+import rootReducer from './modules/rootReducer';
 
-export default configureStore({ reducer: {
-    progress: progressReducer,
-    respostas: respostasReducer
-}});
+const store = createStore(rootReducer);
+
+export default store;

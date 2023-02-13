@@ -10,6 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import * as actions from "../../store/modules/prova/actions";
+import Cartaoresposta from "../../components/cartaoresposta";
 
 const nomeProva = 'FUVEST-2019';
 const [tipoDeProva, ano, dia] = nomeProva.split('-');
@@ -97,44 +98,7 @@ export default function Prova(){
 
                 </Row>
                 <Row>
-
-                    <Col>
-                        <Secao 
-                            sliceBegin={0}
-                            sliceEnd={prova.numQuestoes / 3}
-                            numerosQuestoes={numerosQuestoes}
-                            provaIniciada={provaIniciada}
-                            clickHandler={handleRadioClick}
-                            respostas={respostas}
-                            prova={prova}
-                        />
-                    </Col>
-
-                    <Col>
-                        <Secao 
-                            sliceBegin={prova.numQuestoes / 3}
-                            sliceEnd={prova.numQuestoes / 3 * 2}
-                            numerosQuestoes={numerosQuestoes}
-                            provaIniciada={provaIniciada}
-                            clickHandler={handleRadioClick}
-                            respostas={respostas}
-                            prova={prova}
-                            
-                        />
-                         {provaIniciada && <Button as="input" onClick={handleModalShow} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Finalizar Avaliação" />}
-                    </Col>
-
-                    <Col>
-                        <Secao 
-                            sliceBegin={prova.numQuestoes / 3 * 2}
-                            sliceEnd={prova.numQuestoes}
-                            numerosQuestoes={numerosQuestoes}
-                            provaIniciada={provaIniciada}
-                            clickHandler={handleRadioClick}
-                            respostas={respostas}
-                            prova={prova}
-                        />
-                    </Col>
+                    <Cartaoresposta nomeProva={nomeProva} />
                 </Row>
                 <Modal show={show} onHide={handleModalClose}>
                 <Modal.Header closeButton>

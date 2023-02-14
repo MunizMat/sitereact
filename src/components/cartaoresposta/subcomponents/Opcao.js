@@ -8,7 +8,7 @@ export function Opcao({ letra, numQuestao, isChecked}) {
 
     const handleRadioClick = (e) => {
         const [ questao, letra ] = e.target.id.split('-');
-        dispatch(selecionarResposta())
+        dispatch(selecionarResposta({questao, letra}))
     }
     return (
         <div className="form-check p-0 mx-3">

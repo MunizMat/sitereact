@@ -1,13 +1,11 @@
 import React, {useState, useEffect, useRef, useLayoutEffect} from "react";
 import {provas} from '../../prova';
-import { Secao } from "../../components/cartaoresposta/subcomponents/Secao";
 import { useDispatch, useSelector } from "react-redux";
 import Countdown from "react-countdown";
 import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import * as actions from "../../store/modules/prova/actions";
 import Cartaoresposta from "../../components/cartaoresposta";
@@ -15,7 +13,6 @@ import Cartaoresposta from "../../components/cartaoresposta";
 const nomeProva = 'FUVEST-2019';
 const [tipoDeProva, ano, dia] = nomeProva.split('-');
 const prova = provas[nomeProva];
-const numerosQuestoes = Object.keys(prova.gabarito);
 
 
 export default function Prova(){
@@ -38,6 +35,8 @@ export default function Prova(){
     useEffect(()=>{
         localStorage.setItem('respostas', JSON.stringify(respostas));
     }, [respostas])
+
+
 
    
 
@@ -99,6 +98,9 @@ export default function Prova(){
                 </Row>
                 <Row>
                     <Cartaoresposta nomeProva={nomeProva} />
+                </Row>
+                <Row>
+                    <Button as="input" onClick={() => console.log(respostas)} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Finalizar Avaliação" />
                 </Row>
                 <Modal show={show} onHide={handleModalClose}>
                 <Modal.Header closeButton>

@@ -26,7 +26,6 @@ export default function Cartaoresposta (props) {
                             sliceEnd={prova.numQuestoes / 3 * 2}
                             numerosQuestoes={numerosQuestoes}
                             prova={prova}
-                            
                         />
                     </Col>
 
@@ -35,7 +34,6 @@ export default function Cartaoresposta (props) {
                             sliceBegin={prova.numQuestoes / 3 * 2}
                             sliceEnd={prova.numQuestoes}
                             numerosQuestoes={numerosQuestoes}
-
                             prova={prova}
                         />
                     </Col>

@@ -6,8 +6,9 @@ export function iniciarProva(){
     };
 }
 
-export function selecionarResposta(){
+export function selecionarResposta(resposta){
     return {
-        type: types.SELECIONAR_RESPOSTA
+        type: types.SELECIONAR_RESPOSTA,
+        payload: resposta,
     };
 }

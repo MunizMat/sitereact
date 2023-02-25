@@ -8,6 +8,7 @@ export const HomePage = styled.div`
     width: 100%;
     height: 100%;
     color: white;
+    font-size: 1.4em;
 `
 
 export const FormContainer = styled.form`
@@ -16,6 +17,7 @@ export const FormContainer = styled.form`
     padding: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 20px;
     width: 500px;
     margin: 0 40px;
@@ -26,10 +28,19 @@ export const UserInput = styled.fieldset`
     flex-direction: column;
     gap: 5px;
     padding: 20px;
-    font-size: 1.4em;
 
     select {
         border-radius: 10px;
         padding: 10px;
     }
 `
+export const FormButton = styled.button`
+    background: ${secondaryColor};
+    border: none;
+    border-radius: 10px;
+    color: white;
+    height: 60px;
+    margin: 10px 20px;
+`
+
+

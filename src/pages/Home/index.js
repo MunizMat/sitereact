@@ -1,21 +1,23 @@
 import React, { useState, useRef, createRef, useEffect }from "react";
 import {Prova} from '../../prova';
 import { MyNav } from '../../components/nav/index';
-import { FormContainer, HomePage, UserInput } from './styled';
+import { FormContainer, HomePage, UserInput, FormButton } from './styled';
 
 
 
-const arrayProvas = removeDuplicados(Prova.instances.map(valor => valor.tipoDeProva));
+const arrayProvas = removeDuplicates(Prova.instances.map(valor => valor.tipoDeProva));
 
 const anoEProva = () => {
     const object = {};
-    arrayProvas.forEach(valor => object[valor] = removeDuplicados(Prova.instances.filter(nome => nome.tipoDeProva === valor).map(value => value.ano)));
+    arrayProvas.forEach(valor => object[valor] = removeDuplicates(Prova.instances.filter(nome => nome.tipoDeProva === valor).map(value => value.ano)));
     return object;
 }
 
-function removeDuplicados (array){
+function removeDuplicates (array){
     return array.filter((valor, indice, array) => valor !== array[indice + 1]);
 };
+
+console.log(anoEProva());
 
 
 export default function Home (){
@@ -23,23 +25,6 @@ export default function Home (){
     const [ano, setAno] = useState('');
     const [dia, setDia] = useState('');
     const [errors, setErrors] = useState([]);
-    console.log('teste');
-
-
-    const fields = {
-        prova: {
-            required: true,
-            message: 'É necessário escolher uma prova'
-        },
-        ano: {
-            required: true,
-            message: 'É necessário escolher um ano'
-        },
-        dia: {
-            required: prova === 'ENEM' ? true : false,
-            message: 'É necessário escolher um dia'
-        }
-    }
 
     useEffect(() => {
         firstRender.current = false;
@@ -72,13 +57,28 @@ export default function Home (){
                 <FormContainer method="POST">
                     <UserInput>
                         <label htmlFor="prova">Selecione uma prova:</label>
-                        <select name="prova" id="prova" >
+                        <select name="prova" id="prova" onChange={handleProvaChange}>
                             <option></option>
-                            <option>Enem</option>
-                            <option>Fuvest</option>
-                            <option>Unicamp</option>
+                            {arrayProvas.map(prova => <option value={prova}>{prova}</option>)}
                         </select>
                     </UserInput>
+                    <UserInput>
+                        <label htmlFor="ano">Selecione um ano:</label>
+                        <select name="ano" id="ano" >
+                            <option></option>
+                            {prova && anoEProva()[prova].map(ano => <option value={ano}>{ano}</option>)}
+                        </select>
+                    </UserInput>
+                    {prova === 'ENEM' && 
+                    <UserInput>
+                        <label htmlFor="dia">Selecione um dia:</label>
+                        <select name="dia" id="dia" >
+                            <option></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </UserInput>}
+                    <FormButton type="submit">Iniciar Avaliação</FormButton>
                 </FormContainer>
             </HomePage>
         )

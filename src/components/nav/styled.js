@@ -8,7 +8,7 @@ export const Nav = styled.nav`
     align-items: center;
     justify-content: center;
     a {
-        color: black;
+        color: white;
         text-decoration: none;
     }
 `;

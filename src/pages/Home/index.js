@@ -1,7 +1,7 @@
 import React, { useState, useRef, createRef, useEffect }from "react";
 import {Prova} from '../../prova';
 import { MyNav } from '../../components/nav/index';
-import { } from './styled';
+import { FormContainer, HomePage, UserInput } from './styled';
 
 
 
@@ -67,50 +67,19 @@ export default function Home (){
     const isValid = (field) => {
         return (field.current && field.current.value);
     }
-
-
-
-
         return(
-            <div className="row">
-                <div className="col lg-3"></div>
-                <div className="col lg-5 mt-5">
-                    <form action="/prova" >
-                        <div className="mb-3">
-                            <label className="form-label">Selecione uma Prova:</label>
-                            <select className="form-select" name="prova" onChange={handleProvaChange} ref={provaRef}>
-                                <option></option>
-                                {arrayProvas.map(prova => (
-                                <option key={prova} value={prova}>{prova}</option>
-                                ))}
-                            </select>
-                            
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">Selecione um Ano:</label>
-                            <select className="form-select" name="ano" ref={anoRef} onChange={handleAnoChange}>
-                                <option></option>
-                                {prova &&
-                                    anoEProva()[prova].map(ano => (
-                                        <option key={ano} value={ano}>{ano}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-                            {(prova === 'ENEM' || prova === '') &&
-                            <div className="mb-3">
-                                <label className="form-label">Selecione um Dia:</label>
-                                <select className="form-select" name="dia" ref={diaRef} onChange={handleDiaChange}>
-                                    <option></option>
-                                    <option key="1" value="1">1</option>
-                                    <option key="2" value="2">2</option>
-                                </select>
-                                
-                            </div>}
-                        <button type="submit" className="btn btn-info w-100">Enviar</button>
-                    </form>
-                </div>
-                <div className="col lg-3"></div>
-            </div>
+            <HomePage>
+                <FormContainer method="POST">
+                    <UserInput>
+                        <label htmlFor="prova">Selecione uma prova:</label>
+                        <select name="prova" id="prova" >
+                            <option></option>
+                            <option>Enem</option>
+                            <option>Fuvest</option>
+                            <option>Unicamp</option>
+                        </select>
+                    </UserInput>
+                </FormContainer>
+            </HomePage>
         )
 }

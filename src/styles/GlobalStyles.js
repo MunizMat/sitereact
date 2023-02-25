@@ -1,5 +1,4 @@
 import styled, {createGlobalStyle} from 'styled-components';
-import { primaryColor, primaryDarkColor } from '../config/colors';
 
 export default createGlobalStyle`
     * {
@@ -11,7 +10,7 @@ export default createGlobalStyle`
 
     body {
         font-family: sans-serif;
-        background: ${primaryColor};
+        background: white;
     }
 
     html, body, #root {

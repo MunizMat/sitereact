@@ -32,6 +32,12 @@ export const UserInput = styled.fieldset`
     select {
         border-radius: 10px;
         padding: 10px;
+        border: solid 2px;
+        border-color: rgba(180, 0, 0, 0.8);
+    }
+
+    p {
+        color: rgba(180, 0, 0, 0.8);
     }
 `
 export const FormButton = styled.button`

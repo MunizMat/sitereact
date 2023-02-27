@@ -1,6 +1,7 @@
 import React, { useState, useRef }from "react";
 import {Prova} from '../../prova';
 import { FormContainer, HomePage, UserInput, FormButton } from './styled';
+import { useNavigate } from "react-router-dom";
 
 // Manipulating recieved data
 function removeDuplicates (array){
@@ -16,6 +17,9 @@ const anoEProva = () => {
 }
 
 export default function Home () {
+
+    //Hooks 
+    const navigate = useNavigate();
 
     // States
     const [prova, setProva] = useState('');
@@ -39,7 +43,7 @@ export default function Home () {
         const isEnem = provaRef.current.value === 'ENEM' ? true : false;
         if (!isValid(provaRef) || !isValid(anoRef)) return console.log('FORMULÁRIO INVÁLIDO');
         if (isEnem && (!isValid(provaRef) || !isValid(anoRef) || !isValid(diaRef))) return console.log('FORMULÁRIO INVÁLIDO');
-        console.log('SUCESSO');
+        navigate('/prova');
     }
 
     const isValid = (field) => {

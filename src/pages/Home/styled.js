@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { primaryColor, secondaryColor } from '../../config/colors';
+import { Container } from '../../styles/GlobalStyles';
+
 
 export const HomePage = styled.div`
     display: flex;
@@ -9,6 +11,16 @@ export const HomePage = styled.div`
     height: 100%;
     color: white;
     font-size: 1.4em;
+`
+
+export const ObsContainer = styled(Container)`
+    h1 {
+        margin: 20px;
+    }
+    
+    ul {
+        list-style: disc;
+    }
 `
 
 export const FormContainer = styled.form`

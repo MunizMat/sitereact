@@ -1,6 +1,6 @@
 import React, { useState, useRef }from "react";
 import {Prova} from '../../prova';
-import { FormContainer, HomePage, UserInput, FormButton } from './styled';
+import { FormContainer, ObsContainer, HomePage, UserInput, FormButton } from './styled';
 import { useNavigate } from "react-router-dom";
 
 // Manipulating recieved data
@@ -53,6 +53,13 @@ export default function Home () {
 
         return(
             <HomePage>
+                <ObsContainer>
+                    <h1>Observações</h1>
+                    <ul>
+                        <li><p>Após dar início à sua avaliação, <b> não será possível recomeçar ou pausar a prova! </b></p></li>
+                        <li><p>Fechou a aba ou o navegador sem querer? Não se preocupe! <b> Suas respostas ficam salvas </b>e você pode voltar à realização de sua prova normalmente!</p></li>
+                    </ul>
+                </ObsContainer>
                 <FormContainer onSubmit={handleFormSubmit} action="/" method="POST" className="form">
                     <UserInput valid={isValid(provaRef)}>
                         <label htmlFor="prova">Selecione uma prova:</label>

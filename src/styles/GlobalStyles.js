@@ -1,4 +1,5 @@
 import styled, {createGlobalStyle} from 'styled-components';
+import { primaryColor } from '../config/colors';
 
 export default createGlobalStyle`
     * {
@@ -31,7 +32,14 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.section`
-    max-width: 360px;
-    background: #fff;
-    margin: 30px auto;
+   background: ${primaryColor};
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    width: 500px;
+    margin: 0 40px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
 `

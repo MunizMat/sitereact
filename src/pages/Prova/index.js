@@ -1,14 +1,10 @@
-import React, {useState, useEffect, useRef, useLayoutEffect} from "react";
+import React, {useState, useRef, useLayoutEffect} from "react";
 import {provas} from '../../prova';
 import { useDispatch, useSelector } from "react-redux";
-import Countdown from "react-countdown";
-import Modal from 'react-bootstrap/Modal';
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
 import * as actions from "../../store/modules/prova/actions";
-import Cartaoresposta from "../../components/cartaoresposta";
+import { ProvaPage } from './styled';
+import { CartaoResposta } from '../../components/cartaoresposta/index';
+
 
 const nomeProva = 'FUVEST-2019';
 const [tipoDeProva, ano, dia] = nomeProva.split('-');
@@ -27,18 +23,6 @@ export default function Prova(){
 
     const dispatch = useDispatch();
 
-    // Effects 
-    useEffect(()=>{
-        localStorage.setItem('provaIniciada', JSON.stringify(provaIniciada));
-    }, [provaIniciada])
-
-    useEffect(()=>{
-        localStorage.setItem('respostas', JSON.stringify(respostas));
-    }, [respostas])
-
-
-
-   
 
 
     useLayoutEffect(()=>{
@@ -80,39 +64,11 @@ export default function Prova(){
 
 
     return (
-        <Container>
-            <Form id="formprova" action="#">
-                <Row>
-                    <h1 className="text-center my-4 fs-1">Prova {`${tipoDeProva} ${ano}`}{tipoDeProva === 'ENEM' && ` Dia ${dia}`}</h1>
-        
-                    {!provaIniciada && 
-                    <>
-                        <span className="text-center fs-1">{`${getDuration()}`}</span>
-                        <div className="text-center"> 
-                            <Button as="input" onClick={() => dispatch(actions.iniciarProva())} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Iniciar Avaliação" />
-                        </div>
-                    </>}
-
-                    {provaIniciada && <Countdown className="text-center fs-1" autoStart={true} daysInHours={true} date={new Date(endDate.current)} />}
-
-                </Row>
-                <Row>
-                    <Cartaoresposta nomeProva={nomeProva} />
-                </Row>
-                <Row>
-                    <Button as="input" onClick={() => console.log(respostas)} className="btn btn-info my-3 rounded-2 w-100" variant="info" value="Finalizar Avaliação" />
-                </Row>
-                <Modal show={show} onHide={handleModalClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Desejas finalizar sua prova?</Modal.Title>
-                </Modal.Header>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={handleModalClose}>Cancelar</Button>
-                    <Button variant="primary" form="formprova" type="submit">Finalizar Prova</Button>
-                </Modal.Footer>
-            </Modal>
-            </Form>
-
-        </Container>)
+        <ProvaPage>
+            <h1>Prova FUVEST 2019</h1>
+            <h2>05:00:00</h2>
+            <CartaoResposta nomeProva={nomeProva}/>
+        </ProvaPage>
+        )
 }
 

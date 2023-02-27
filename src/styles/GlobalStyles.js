@@ -32,7 +32,7 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.section`
-   background: ${primaryColor};
+    background: ${primaryColor};
     border-radius: 20px;
     padding: 10px;
     display: flex;

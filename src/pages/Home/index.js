@@ -1,8 +1,11 @@
-import React, { useState, useRef, useEffect }from "react";
+import React, { useState, useRef }from "react";
 import {Prova} from '../../prova';
 import { FormContainer, HomePage, UserInput, FormButton } from './styled';
 
-
+// Manipulating recieved data
+function removeDuplicates (array){
+    return array.filter((valor, indice, array) => valor !== array[indice + 1]);
+};
 
 const arrayProvas = removeDuplicates(Prova.instances.map(valor => valor.tipoDeProva));
 
@@ -12,54 +15,42 @@ const anoEProva = () => {
     return object;
 }
 
-function removeDuplicates (array){
-    return array.filter((valor, indice, array) => valor !== array[indice + 1]);
-};
+export default function Home () {
 
-export default function Home (){
+    // States
     const [prova, setProva] = useState('');
-    const [ano, setAno] = useState('');
-    const [dia, setDia] = useState('');
-    const [errors, setErrors] = useState([]);
+    const [formSubmited, setFormSubmited] = useState(false);
 
-    useEffect(() => {
-        firstRender.current = false;
-    }, [])
-
+    // Refs
     const provaRef = useRef(null);
     const anoRef = useRef(null);
     const diaRef = useRef(null);
-    const firstRender = useRef(true);
 
+    // Handlers and Functions
     const handleProvaChange = (e) => {
         setProva(e.target.value);
+    }
+    const handleBtnClick = (e) => {
+        setFormSubmited(true);
     }
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        checkForEmptyFields(provaRef.current, anoRef.current, diaRef.current);
-    }
-
-    const checkForEmptyFields = (provaField, anoField, diaField) => {
-        let emptyField = false; 
-        if (!provaField.value || !anoField.value) emptyField = true;
-    }
-
-    const handleAnoChange = (e) => {
-        setAno(e.target.value);
-    }
-
-    const handleDiaChange = (e) => {
-        setDia(e.target.value);
+        const isEnem = provaRef.current.value === 'ENEM' ? true : false;
+        if (!isValid(provaRef) || !isValid(anoRef)) return console.log('FORMULÁRIO INVÁLIDO');
+        if (isEnem && (!isValid(provaRef) || !isValid(anoRef) || !isValid(diaRef))) return console.log('FORMULÁRIO INVÁLIDO');
+        console.log('SUCESSO');
     }
 
     const isValid = (field) => {
+        if (!formSubmited) return true;
         return (field.current && field.current.value);
     }
+
         return(
             <HomePage>
                 <FormContainer onSubmit={handleFormSubmit} action="/" method="POST" className="form">
-                    <UserInput>
+                    <UserInput valid={isValid(provaRef)}>
                         <label htmlFor="prova">Selecione uma prova:</label>
                         <select name="prova" id="prova" onChange={handleProvaChange} ref={provaRef}>
                             <option></option>
@@ -67,24 +58,25 @@ export default function Home (){
                         </select>
                         {!isValid(provaRef) && <p>É necessário escolher uma prova</p>}
                     </UserInput>
-                    <UserInput>
+                    <UserInput valid={isValid(anoRef)}>
                         <label htmlFor="ano">Selecione um ano:</label>
-                        <select name="ano" id="ano" ref={anoRef} onChange={handleAnoChange}>
+                        <select name="ano" id="ano" ref={anoRef}>
                             <option></option>
                             {prova && anoEProva()[prova].map(ano => <option value={ano}>{ano}</option>)}
                         </select>
                         {!isValid(anoRef) && <p>É necessário escolher um ano</p>}
                     </UserInput>
                     {prova === 'ENEM' && 
-                    <UserInput>
+                    <UserInput valid={isValid(diaRef)}>
                         <label htmlFor="dia">Selecione um dia:</label>
-                        <select name="dia" id="dia" ref={diaRef} onChange={handleDiaChange}>
+                        <select name="dia" id="dia" ref={diaRef}>
                             <option></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                         </select>
+                        {!isValid(diaRef) && <p>É necessário escolher um dia</p>}
                     </UserInput>}
-                    <FormButton type="submit">Iniciar Avaliação</FormButton>
+                    <FormButton type="submit" onClick={handleBtnClick}>Iniciar Avaliação</FormButton>
                 </FormContainer>
             </HomePage>
         )

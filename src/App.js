@@ -1,5 +1,4 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { MyNav } from './components/nav/index';
 import store, { persistor } from "./store/index";
 import { Provider } from "react-redux";

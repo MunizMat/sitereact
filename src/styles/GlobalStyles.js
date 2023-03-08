@@ -24,6 +24,7 @@ export default createGlobalStyle`
 
     a {
         text-decoration: none;
+        color: white;
     }
 
     ul {

@@ -7,9 +7,14 @@
   <li><p><strong>React</strong></p></li>
   <li><p><strong>NodeJS</strong></p></li>
   <li><p><strong>Redux</strong></p></li>
+  <li><p><strong>Styled Components</strong></p></li>
 </ul>
 
-<img width="800" alt="Captura de Tela 2023-02-11 às 13 32 29" src="https://user-images.githubusercontent.com/103901768/218269778-b19cbf32-874e-4833-8dd7-69f86c41e1de.png">
+<img width="1431" alt="Captura de Tela 2023-03-08 às 14 42 48" src="https://user-images.githubusercontent.com/103901768/223789988-c5cff018-a6f1-4603-b2ae-c1a3a1451711.png">
+
+<img width="1413" alt="Captura de Tela 2023-03-08 às 14 43 01" src="https://user-images.githubusercontent.com/103901768/223790409-c122670a-79b2-42ee-ae53-fb016c8c9905.png">
+
+
 
 
 

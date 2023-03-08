@@ -1,12 +1,12 @@
 import React from "react";
 import { LoginPage } from './styled';
-import {Container, UserInput} from '../../styles/GlobalStyles';
+import {FormContainer, UserInput} from '../../styles/GlobalStyles';
 
 export default function Login () {
 
         return(
             <LoginPage>
-                <Container>
+                <FormContainer>
                     <h2>Fazer Login</h2>
                     <UserInput>
                         <label htmlFor="email">Email:</label>
@@ -17,10 +17,10 @@ export default function Login () {
                         <input type="password" name="password" id="password"></input>
                     </UserInput>
                     <div className="btn-group">
-                        <button className="btn criar-conta">Criar Conta</button>
-                        <button className="btn entrar">Entrar</button>
+                        <a href="/cadastro">Criar Conta</a>
+                        <button type="submit" className="btn entrar">Entrar</button>
                     </div>
-                </Container>
+                </FormContainer>
             </LoginPage>
         )
 }

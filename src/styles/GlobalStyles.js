@@ -32,18 +32,24 @@ export default createGlobalStyle`
     }
 `;
 
-export const Container = styled.section`
-    background: ${primaryColor};
-    border-radius: 20px;
-    padding: 30px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    width: 500px;
-    margin: 0 40px;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
-`
+const baseContainerStyles = `
+  background: ${primaryColor};
+  border-radius: 20px;
+  padding: 30px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  width: 500px;
+  margin: 0 40px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+`;
+
+const createContainer = (type) => styled[type]`${baseContainerStyles}`;
+
+export const FormContainer = createContainer('form');
+export const Container = createContainer('section');
+
 
 export const UserInput = styled.fieldset`
     display: flex;

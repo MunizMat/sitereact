@@ -23,18 +23,6 @@ export const ObsContainer = styled(Container)`
     }
 `
 
-export const FormContainer = styled.form`
-    background: ${primaryColor};
-    border-radius: 20px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    width: 500px;
-    margin: 0 40px;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
-`
 export const SelectInput = styled(UserInput)`
 
     select {

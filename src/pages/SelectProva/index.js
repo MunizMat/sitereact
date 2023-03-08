@@ -1,7 +1,8 @@
 import React, { useState, useRef }from "react";
 import {Prova} from '../../prova';
-import { FormContainer, ObsContainer, HomePage, SelectInput, FormButton } from './styled';
+import { ObsContainer, HomePage, SelectInput, FormButton } from './styled';
 import { useNavigate } from "react-router-dom";
+import { FormContainer } from "../../styles/GlobalStyles";
 
 // Manipulating recieved data
 function removeDuplicates (array){

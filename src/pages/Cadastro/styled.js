@@ -5,7 +5,7 @@ import { secondaryColor } from '../../config/colors';
 
 
 
-export const LoginPage = styled.div`
+export const CadastroPage = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,39 +16,20 @@ export const LoginPage = styled.div`
     background-size: cover;
     font-size: 1.4em;
 
-    a {
-        color: black;
-        background: white;
-        text-align: center;
-    }
-
     h2 {
         text-align: center;
     }
 
-    .btn-group {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        padding: 20px;
-    }
 
     .criar-conta {
-        background: white;
-    }
-
-    .entrar {
         background: ${secondaryColor};
+        border: none;
+        font-size: 1.1em;
+        padding: 10px 0;
+        margin: 0 20px;
+        border-radius: 10px;
         color: white;
     }
 
-    .btn, a {
-        border: none;
-        font-size: 1.1em;
-        padding: 10px 20px;
-        border-radius: 10px;
-        width: 100%;
-    }
 `
 

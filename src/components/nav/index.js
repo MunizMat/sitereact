@@ -6,6 +6,7 @@ export function MyNav() {
   return (
     <Nav>
       <Link to="/">Home</Link>
+      <Link to="/login">Login</Link>
     </Nav>
   );
 }

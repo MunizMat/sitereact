@@ -9,7 +9,7 @@ export default function Home () {
                     <h1>Studiez</h1>
                     <h2>Sua plataforma de estudos</h2>
                     <a href="/">
-                        <LoginBtn><p>Fazer Login</p></LoginBtn>
+                        <LoginBtn><p>Faça login ou crie sua conta</p></LoginBtn>
                     </a>
                 </div>
             </HomePage>

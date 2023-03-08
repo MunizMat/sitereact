@@ -6,6 +6,7 @@ import Prova from "../pages/Prova";
 import Page404 from "../pages/Page404";
 import SelectProva from "../pages/SelectProva";
 import Cadastro from "../pages/Cadastro";
+import HomeAluno from "../pages/HomeAluno";
 
 
 export function MyRoutes(){
@@ -14,6 +15,7 @@ export function MyRoutes(){
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/cadastro" element={<Cadastro />} />
+                <Route exact path="/aluno" element={<HomeAluno />} />
                 <Route exact path="/selecionar" element={<SelectProva />} />
                 <Route path="/prova" element={<Prova />} />
                 <Route path="*" element={<Page404 />} />

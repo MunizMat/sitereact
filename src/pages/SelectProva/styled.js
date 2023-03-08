@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { primaryColor, secondaryColor } from '../../config/colors';
-import { Container } from '../../styles/GlobalStyles';
+import { Container, UserInput } from '../../styles/GlobalStyles';
 
 
 export const HomePage = styled.div`
@@ -35,15 +35,9 @@ export const FormContainer = styled.form`
     margin: 0 40px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
 `
-export const UserInput = styled.fieldset`
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 20px;
+export const SelectInput = styled(UserInput)`
 
     select {
-        border-radius: 10px;
-        padding: 10px;
         border: ${props => props.valid ? 'none' : 'solid 2px'};
         border-color: rgba(180, 0, 0, 0.8);
     }

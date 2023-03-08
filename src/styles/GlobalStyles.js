@@ -35,7 +35,7 @@ export default createGlobalStyle`
 export const Container = styled.section`
     background: ${primaryColor};
     border-radius: 20px;
-    padding: 10px;
+    padding: 30px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,4 +43,20 @@ export const Container = styled.section`
     width: 500px;
     margin: 0 40px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+`
+
+export const UserInput = styled.fieldset`
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    border-style: none;
+    
+    select, input {
+        border-radius: 10px;
+        padding: 10px;
+        border: none;
+        font-size: 1em;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
 `

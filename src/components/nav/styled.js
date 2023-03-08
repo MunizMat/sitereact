@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { infoColor } from "../../config/colors";
+import { primaryColor } from "../../config/colors";
 
 export const Nav = styled.nav`
-    background-color: ${infoColor};
+    background-color: ${primaryColor};
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     a {
         color: white;
         text-decoration: none;
+        margin: 0 60px;
     }
 `;

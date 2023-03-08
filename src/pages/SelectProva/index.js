@@ -1,6 +1,6 @@
 import React, { useState, useRef }from "react";
 import {Prova} from '../../prova';
-import { FormContainer, ObsContainer, HomePage, UserInput, FormButton } from './styled';
+import { FormContainer, ObsContainer, HomePage, SelectInput, FormButton } from './styled';
 import { useNavigate } from "react-router-dom";
 
 // Manipulating recieved data
@@ -61,24 +61,24 @@ export default function SelectProva () {
                     </ul>
                 </ObsContainer>
                 <FormContainer onSubmit={handleFormSubmit} action="/" method="POST" className="form">
-                    <UserInput valid={isValid(provaRef)}>
+                    <SelectInput valid={isValid(provaRef)}>
                         <label htmlFor="prova">Selecione uma prova:</label>
                         <select name="prova" id="prova" onChange={handleProvaChange} ref={provaRef}>
                             <option></option>
                             {arrayProvas.map(prova => <option value={prova}>{prova}</option>)}
                         </select>
                         {!isValid(provaRef) && <p>É necessário escolher uma prova</p>}
-                    </UserInput>
-                    <UserInput valid={isValid(anoRef)}>
+                    </SelectInput>
+                    <SelectInput valid={isValid(anoRef)}>
                         <label htmlFor="ano">Selecione um ano:</label>
                         <select name="ano" id="ano" ref={anoRef}>
                             <option></option>
                             {prova && anoEProva()[prova].map(ano => <option value={ano}>{ano}</option>)}
                         </select>
                         {!isValid(anoRef) && <p>É necessário escolher um ano</p>}
-                    </UserInput>
+                    </SelectInput>
                     {prova === 'ENEM' && 
-                    <UserInput valid={isValid(diaRef)}>
+                    <SelectInput valid={isValid(diaRef)}>
                         <label htmlFor="dia">Selecione um dia:</label>
                         <select name="dia" id="dia" ref={diaRef}>
                             <option></option>
@@ -86,7 +86,7 @@ export default function SelectProva () {
                             <option value="2">2</option>
                         </select>
                         {!isValid(diaRef) && <p>É necessário escolher um dia</p>}
-                    </UserInput>}
+                    </SelectInput>}
                     <FormButton type="submit" onClick={handleBtnClick}>Iniciar Avaliação</FormButton>
                 </FormContainer>
             </HomePage>

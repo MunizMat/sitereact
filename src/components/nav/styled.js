@@ -5,11 +5,27 @@ export const Nav = styled.nav`
     background-color: ${primaryColor};
     height: 50px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 40px;
+        width: 50%;
+    }
+
+    .right-side {
+        justify-content: flex-end;
+        margin-right: 50px;
+    }
+
+    .left-side {
+        justify-content: flex-start;
+        margin-left: 50px;
+    }
+
     a {
         color: white;
         text-decoration: none;
-        margin: 0 60px;
     }
 `;
